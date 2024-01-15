@@ -1,8 +1,7 @@
 import { cookies } from "../../components/cookies-config";
 
-export const getAuthQuery = () => {
+export const getAuthParams = () => {
     const publicKey = cookies.get('publicKey')
-    const privateKey = cookies.get('privateKey')
     const hash = cookies.get('hash')
     
     return{

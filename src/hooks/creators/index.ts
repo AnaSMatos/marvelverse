@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { getAuthQuery } from "../get-auth-query";
+import { getAuthParams } from "../get-auth-query";
 import { API_ROUTES } from "../api-routes";
 import axios from "axios";
 
 export const useGetCreators = () => {
     const [creators, setCreators] = useState([])
-    const {params} = getAuthQuery()
+    const {params} = getAuthParams()
     
     const fetchCreators = () => {
         const promise = axios.get(API_ROUTES.CREATORS, {params})
