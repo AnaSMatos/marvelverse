@@ -11,7 +11,7 @@ export const useGetComics = () => {
         const promise = axios.get(API_ROUTES.COMICS, {params})
         promise
         .then((res) => {
-            setComics(res.data)
+            setComics(res.data.data.results)
         })
         .catch((err) => {
             console.log(err)

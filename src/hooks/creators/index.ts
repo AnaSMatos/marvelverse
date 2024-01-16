@@ -11,7 +11,7 @@ export const useGetCreators = () => {
         const promise = axios.get(API_ROUTES.CREATORS, {params})
         promise
         .then((res) => {
-            setCreators(res.data)
+            setCreators(res.data.data.results)
         })
         .catch((err) => {
             console.log(err)

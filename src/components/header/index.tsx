@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom"
-import { HeaderContainer } from "./styles"
+import { HeaderContainer, PaginationButtons, ConfigButton, HeaderButton } from "./styles"
+import marvel_logo from "./../../assets/marvel.svg"
 
 export const Header = () => {
     const navigate = useNavigate()
@@ -8,11 +9,18 @@ export const Header = () => {
 
     return(
         <HeaderContainer showHeader={showHeader}>
-            <button onClick={() => navigate('/')}>Home</button>
-            <button onClick={() => navigate('/signin')}>Login</button>
-            <button onClick={() => navigate('/characters')}>Characters</button>
-            <button onClick={() => navigate('/creators')}>Creators</button>
-            <button onClick={() => navigate('/comics')}>Comics</button>
+            <PaginationButtons>
+                <HeaderButton onClick={() => navigate('/')}>Home</HeaderButton>
+                <HeaderButton onClick={() => navigate('/characters')}>Characters</HeaderButton>
+                <HeaderButton onClick={() => navigate('/creators')}>Creators</HeaderButton>
+                <HeaderButton onClick={() => navigate('/comics')}>Comics</HeaderButton>
+            </PaginationButtons>
+            <img src={marvel_logo} alt="" />
+            <ConfigButton>
+                <HeaderButton>
+                    <i className="fa-solid fa-gear"></i>
+                </HeaderButton>
+            </ConfigButton>
         </HeaderContainer>
     )
 }

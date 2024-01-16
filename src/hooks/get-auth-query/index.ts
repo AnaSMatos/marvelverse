@@ -1,6 +1,6 @@
 import { cookies } from "../../components/cookies-config";
 
-export const getAuthParams = () => {
+export const getAuthParams = ({offset=1}) => {
     const publicKey = cookies.get('publicKey')
     const hash = cookies.get('hash')
     
@@ -8,7 +8,8 @@ export const getAuthParams = () => {
         params: {
             ts: 1,
             apikey: publicKey,
-            hash
+            hash,
+            offset
         }
     }
 }

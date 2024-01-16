@@ -3,27 +3,32 @@ import { getAuthParams } from "../get-auth-query";
 import { API_ROUTES } from "../api-routes";
 import axios from "axios";
 
-export const useGetCharacters = () => {
+export const useGetCharacters = ({offset}) => {
     const [characters, setCharacters] = useState([])
-    const {params} = getAuthParams()
+    const [isLoading, setIsLoading] = useState(true)
+    const {params} = getAuthParams({offset})
     
     const fetchCharacters = () => {
+        setIsLoading(true)
         const promise = axios.get(API_ROUTES.CHARACTERS, {params})
         promise
         .then((res) => {
-            setCharacters(res.data)
+            setCharacters([...characters, ...res.data.data.results])
+            setIsLoading(false)
         })
         .catch((err) => {
             console.log(err)
+            setIsLoading(false)
         })
     }
 
     useEffect(() => {
         fetchCharacters()
-    }, [])
+    }, [offset])
 
     return{
-        characters
+        characters,
+        isLoading
     }
 
 }
