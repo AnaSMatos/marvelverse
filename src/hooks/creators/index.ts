@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const useGetCreators = () => {
     const [creators, setCreators] = useState([])
-    const {params} = getAuthParams()
+    const {params} = getAuthParams({offset: 0})
     
     const fetchCreators = () => {
         const promise = axios.get(API_ROUTES.CREATORS, {params})
