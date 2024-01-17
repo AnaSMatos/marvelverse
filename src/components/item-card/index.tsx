@@ -9,9 +9,9 @@ type CardProps = {
 
 export const ItemCard = ({photo, title, description = "", type} : CardProps) => {
     return(
-        <Card style={{width: type === 'comic' ? '190px' : '250px'}}>
+        <Card className={type == 'comic' ? 'comic' : ''}>
             <img src={photo} alt={`Image representing ${title}`} />
-            <Intro style={{height: type === 'comic' ? '190px' : '250px'}}>
+            <Intro className={type == 'comic' ? 'comic' : ''}>
                 <h1>{title}</h1>
                 <p>{description || ""}</p>
             </Intro>

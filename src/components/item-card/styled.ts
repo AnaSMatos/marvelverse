@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
+    width: 250px;
     height: 300px;
     box-shadow: 5px 5px 15px #193a66;
     overflow: hidden;
@@ -22,9 +23,13 @@ export const Card = styled.div`
             transform: scale(1.1) rotate(-3deg);
         }
     }
+    &.comic{
+        width: 190px;
+    }
 `
 
 export const Intro = styled.div`
+    height: 70px;
     width: 100%;
     padding: 6px;
     box-sizing: border-box;
@@ -42,5 +47,8 @@ export const Intro = styled.div`
         font-size: 15px;
         margin: 20px;
         display: none;
+    }
+    &.comic{
+        height: 140px;
     }
 `
