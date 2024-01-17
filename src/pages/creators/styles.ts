@@ -4,12 +4,12 @@ export const Creator = styled.div`
     position: relative;
     height: 100px;
     display: flex;
-    color: white;
+    color: ${props => props.theme.creatorsFontColor};
     border-radius: 8px;
     overflow: hidden;
     font-family: 'Bangers';
-    box-shadow: 5px 5px 15px #193a66;
-    background-color: #193a664d;
+    box-shadow: ${props => props.theme.contentBoxShadow};
+    background-color: ${props => props.theme.creatorsBackground};
     img{
         width: 80px;
     }
@@ -39,7 +39,7 @@ export const MoreButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: ${props => props.theme.creatorsFontColor};
     background: none;
     border: none;
     &:hover{

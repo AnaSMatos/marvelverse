@@ -8,7 +8,7 @@ export const InputContainer = styled.div`
     input{
         height: 40px;
         width: 50%;
-        background-color: white;
+        background-color: ${props => props.theme.inputBackground};
         padding: 0 10px;
         border: none;
         outline: none;
