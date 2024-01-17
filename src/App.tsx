@@ -15,8 +15,17 @@ function App() {
   const [theme, setTheme] = useState('light')
 
   useEffect(() => {
-    const storedTheme = cookies.get('theme') || 'light';
-    setTheme(storedTheme)
+    const storedTheme = cookies.get('theme')
+    if(storedTheme){
+      return setTheme(storedTheme)
+    }
+
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if(isDarkMode){
+      return setTheme('dark')
+    }
+
+    setTheme('light')
   }, [])
 
   const changeTheme = (mode: string) => {
