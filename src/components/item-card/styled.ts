@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Card = styled.div`
     height: 300px;
-    width: ${({comic}) => comic ? '190px' : '250px'};
     box-shadow: 5px 5px 15px #193a66;
     overflow: hidden;
     border-radius: 3px;
@@ -26,8 +25,7 @@ export const Card = styled.div`
 `
 
 export const Intro = styled.div`
-    height: ${({comic}) => comic ? '170px' : '70px'};
-    width: ${({comic}) => comic ? '190px' : '250px'};
+    width: 100%;
     padding: 6px;
     box-sizing: border-box;
     position: absolute;

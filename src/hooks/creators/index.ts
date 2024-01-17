@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { getAuthParams } from "../get-auth-query";
 import { API_ROUTES } from "../api-routes";
 import axios from "axios";
+import { ApiProps } from "../../model/api-hook-type";
+import { Creator } from "../../model/creator";
 
-export const useGetCreators = ({offset}) => {
-    const [creators, setCreators] = useState([])
+export const useGetCreators = ({offset} : ApiProps) => {
+    const [creators, setCreators] = useState<Creator[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(false)
     const {params} = getAuthParams({offset})
@@ -13,11 +15,11 @@ export const useGetCreators = ({offset}) => {
         setIsLoading(true)
         const promise = axios.get(API_ROUTES.CREATORS, {params})
         promise
-        .then((res) => {
+        .then((res: { data: {data: { results: Creator[] }}}) => {
             setCreators([...creators, ...res.data.data.results])
             setIsLoading(false)
         })
-        .catch((err) => {
+        .catch(() => {
             setError(true)
             setIsLoading(false)
         })
