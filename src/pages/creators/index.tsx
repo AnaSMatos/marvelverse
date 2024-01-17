@@ -5,10 +5,11 @@ import { Creator, Details, MoreButton } from "./styles"
 import { ScrollFooter } from "../../components/infinite-scroll-footer"
 import { useState, useRef, useCallback, RefCallback } from "react"
 import { ErrorMessage } from "../../components/error-msg"
+import { SearchInput } from "../../components/search-input"
 
 export const Creators = () => {
-    const [pageNumber, setPageNumber] = useState(0)
-    const {creators, isLoading, error} = useGetCreators({offset: pageNumber * 20})
+    const [searchQuery, setSearchQuery] = useState("")
+    const {creators, isLoading, error, onSearchName, setPageNumber, hasMore} = useGetCreators({searchQuery})
     
     const observer = useRef<IntersectionObserver | null>(null);
 
@@ -20,17 +21,22 @@ export const Creators = () => {
         }
 
         observer.current = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && hasMore) {
             setPageNumber(prevPage => prevPage + 1);
         }
         });
 
         observer.current.observe(node);
-    }, [isLoading, error]);
+    }, [isLoading, error, hasMore]);
+
+    const handleChange = (value: string) => {
+        setSearchQuery(value);
+    };  
     
     return(
         <Container>
             {error && <ErrorMessage />}
+            <SearchInput onChangeValue={handleChange} placeholder="Nome do criador" onSearch={onSearchName}/>
             <ItemsList>
                 {creators?.map(creator => (
                     <Creator>
