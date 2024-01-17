@@ -1,7 +1,6 @@
 # Marvelverse
 
-Marvelverse é uma aplicação web que utiliza a API Pública da Marvel para exibir informações sobre esse universo.
-
+Marvelverse é uma aplicação web que utiliza a API Pública da Marvel para para revelar as maravilhas e os detalhes desse universo.
 ## Funcionalidades
 
 - **Autenticação na API**
@@ -20,11 +19,8 @@ Marvelverse é uma aplicação web que utiliza a API Pública da Marvel para exi
 
  - **/signin** - Autenticação e edição das keys de acesso da API.
  - **/characters** - Listagem de todos os personagens
- - **/characters/{id}** - Página de detalhes de um personagem.
  - **/comics** - Listagem de todos os quadrinhos.
- - **/comics/{id}** - Página de detalhes de um quadrinho.
  - **/creators**  - Listagem de todos os criadores
- - **/creators/{id}** - Página de detalhes de um criador.
 
 ## Como Começar
 
