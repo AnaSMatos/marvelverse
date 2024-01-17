@@ -4,17 +4,18 @@ import { ItemsList } from "../../components/items-list/styled"
 import { Creator, Details, MoreButton } from "./styles"
 import { ScrollFooter } from "../../components/infinite-scroll-footer"
 import { useState, useRef, useCallback } from "react"
+import { ErrorMessage } from "../../components/error-msg"
 
 export const Creators = () => {
     const [pageNumber, setPageNumber] = useState(0)
-    const {creators, isLoading} = useGetCreators({offset: pageNumber * 20})
+    const {creators, isLoading, error} = useGetCreators({offset: pageNumber * 20})
 
     console.log(isLoading)
     
     const observer = useRef()
 
     const lastElementRef = useCallback(node => {
-        if (isLoading) return
+        if (isLoading || error) return
         if(observer.current) observer.current.disconnect()
 
         observer.current = new IntersectionObserver(entries => {
@@ -28,6 +29,7 @@ export const Creators = () => {
     
     return(
         <Container>
+            {error && <ErrorMessage />}
             <ItemsList>
                 {creators?.map(creator => (
                     <Creator>

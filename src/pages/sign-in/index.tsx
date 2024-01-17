@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {Container, SignInForm, KeyInput, SubmitButton} from './styles.js'
 import md5 from 'md5'
 import { cookies } from '../../components/cookies-config/index.js'
@@ -6,18 +7,30 @@ import login_img from './../../assets/login-wallpaper.jpeg'
 import marvel_logo from './../../assets/marvel.svg'
 
 const SignIn = () => {
-    
+    const navigate = useNavigate()
     const [signInForm, setSignInForm] = useState({
         publicKey: "",
         privateKey: "",
         hash: ""
     })
 
+    useEffect(() => {
+        const storedPublicKey = cookies.get('publicKey') || '';
+        const storedPrivateKey = cookies.get('privateKey') || '';
+    
+        setSignInForm({
+          publicKey: storedPublicKey,
+          privateKey: storedPrivateKey,
+          hash: '',
+        });
+      }, []);
+
     const handleSubmit = () => {
         cookies.set('publicKey', signInForm.publicKey)
         cookies.set('privateKey', signInForm.privateKey)
         const hashCode = `1${signInForm.privateKey}${signInForm.publicKey}`
         cookies.set('hash', md5(hashCode))
+        navigate('/characters')
     }
 
     return(

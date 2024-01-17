@@ -4,15 +4,16 @@ import { ItemCard } from "../../components/item-card"
 import { useState, useRef, useCallback } from "react"
 import { ItemsList } from "../../components/items-list/styled"
 import { ScrollFooter } from "../../components/infinite-scroll-footer"
+import { ErrorMessage } from "../../components/error-msg"
 
 export const Comics = () => {
     const [pageNumber, setPageNumber] = useState(0)
-    const {comics, isLoading} = useGetComics({offset: pageNumber * 20})
+    const {comics, isLoading, error} = useGetComics({offset: pageNumber * 20})
 
     const observer = useRef()
 
     const lastElementRef = useCallback(node => {
-        if (isLoading) return
+        if (isLoading || error ) return
         if(observer.current) observer.current.disconnect()
 
         observer.current = new IntersectionObserver(entries => {
@@ -26,6 +27,7 @@ export const Comics = () => {
     
     return(
         <Container>
+            {error && <ErrorMessage />}
             <ItemsList>
                 {comics.map((comic, index) => (
                     <ItemCard 

@@ -5,7 +5,7 @@ import marvel_logo from "./../../assets/marvel.svg"
 export const Header = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    const showHeader = location.pathname !== '/signin'
+    const showHeader = (location.pathname !== '/signin')
 
     return(
         <>
@@ -18,7 +18,7 @@ export const Header = () => {
                 </PaginationButtons>
                 <img src={marvel_logo} alt="" />
                 <ConfigButton>
-                    <HeaderButton>
+                    <HeaderButton onClick={() => navigate('signin')}>
                         <i className="fa-solid fa-gear"></i>
                     </HeaderButton>
                 </ConfigButton>

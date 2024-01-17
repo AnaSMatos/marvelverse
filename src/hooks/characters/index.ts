@@ -6,6 +6,7 @@ import axios from "axios";
 export const useGetCharacters = ({offset}) => {
     const [characters, setCharacters] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(false)
     const {params} = getAuthParams({offset})
     
     const fetchCharacters = () => {
@@ -17,7 +18,7 @@ export const useGetCharacters = ({offset}) => {
             setIsLoading(false)
         })
         .catch((err) => {
-            console.log(err)
+            setError(true)
             setIsLoading(false)
         })
     }
@@ -28,7 +29,8 @@ export const useGetCharacters = ({offset}) => {
 
     return{
         characters,
-        isLoading
+        isLoading,
+        error
     }
 
 }

@@ -6,6 +6,7 @@ import axios from "axios";
 export const useGetCreators = ({offset}) => {
     const [creators, setCreators] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(false)
     const {params} = getAuthParams({offset})
     
     const fetchCreators = () => {
@@ -17,7 +18,7 @@ export const useGetCreators = ({offset}) => {
             setIsLoading(false)
         })
         .catch((err) => {
-            console.log(err)
+            setError(true)
             setIsLoading(false)
         })
     }
@@ -28,7 +29,8 @@ export const useGetCreators = ({offset}) => {
 
     return{
         creators,
-        isLoading
+        isLoading,
+        error
     }
 
 }

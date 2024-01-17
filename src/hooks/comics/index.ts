@@ -6,6 +6,7 @@ import axios from "axios";
 export const useGetComics = ({offset}) => {
     const [comics, setComics] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(false)
     const {params} = getAuthParams({offset})
     
     const fetchComics = () => {
@@ -17,7 +18,7 @@ export const useGetComics = ({offset}) => {
             setIsLoading(false)
         })
         .catch((err) => {
-            console.log(err)
+            setError(true)
             setIsLoading(false)
         })
     }
@@ -28,7 +29,8 @@ export const useGetComics = ({offset}) => {
 
     return{
         comics,
-        isLoading
+        isLoading,
+        error
     }
 
 }
