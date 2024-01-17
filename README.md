@@ -20,6 +20,10 @@ Marvelverse é uma aplicação web que utiliza a API Pública da Marvel para exi
 
 1. Clone o repositório:
 
+   ```bash
+    git clone <url do repositório>
+    ```
+
 2. Instale as dependências:
 
    ```bash
