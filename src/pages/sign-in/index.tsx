@@ -33,6 +33,7 @@ const SignIn = () => {
         navigate('/characters')
     }
 
+
     return(
         <Container>
             <img src={login_img} alt=""/>
@@ -42,13 +43,13 @@ const SignIn = () => {
                     type="text" 
                     placeholder="Public Key" 
                     value={signInForm.publicKey}
-                    onChange={(e: { target: { value: string } }) => setSignInForm({...signInForm, publicKey: e.target.value})}                    
+                    onChange={(e) => setSignInForm({...signInForm, publicKey: e.target.value})}                    
                     />
                 <KeyInput 
                     type="text" 
                     placeholder="Private Key" 
                     value={signInForm.privateKey}
-                    onChange={(e: { target: { value: string } }) => setSignInForm({...signInForm, privateKey: e.target.value})}  
+                    onChange={(e) => setSignInForm({...signInForm, privateKey: e.target.value})}  
                 />
                 <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>  
             </SignInForm>
