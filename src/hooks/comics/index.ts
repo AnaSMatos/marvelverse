@@ -5,8 +5,8 @@ import axios from "axios";
 
 export const useGetComics = ({offset}) => {
     const [comics, setComics] = useState([])
-    const {params} = getAuthParams({offset})
     const [isLoading, setIsLoading] = useState(false)
+    const {params} = getAuthParams({offset})
     
     const fetchComics = () => {
         setIsLoading(true)

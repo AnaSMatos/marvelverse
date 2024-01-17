@@ -8,19 +8,22 @@ export const Header = () => {
     const showHeader = location.pathname !== '/signin'
 
     return(
-        <HeaderContainer showHeader={showHeader}>
-            <PaginationButtons>
-                <HeaderButton onClick={() => navigate('/')}>Home</HeaderButton>
-                <HeaderButton onClick={() => navigate('/characters')}>Characters</HeaderButton>
-                <HeaderButton onClick={() => navigate('/creators')}>Creators</HeaderButton>
-                <HeaderButton onClick={() => navigate('/comics')}>Comics</HeaderButton>
-            </PaginationButtons>
-            <img src={marvel_logo} alt="" />
-            <ConfigButton>
-                <HeaderButton>
-                    <i className="fa-solid fa-gear"></i>
-                </HeaderButton>
-            </ConfigButton>
-        </HeaderContainer>
+        <>
+        {showHeader &&
+            <HeaderContainer>
+                <PaginationButtons>
+                    <HeaderButton onClick={() => navigate('/characters')}>Characters</HeaderButton>
+                    <HeaderButton onClick={() => navigate('/creators')}>Creators</HeaderButton>
+                    <HeaderButton onClick={() => navigate('/comics')}>Comics</HeaderButton>
+                </PaginationButtons>
+                <img src={marvel_logo} alt="" />
+                <ConfigButton>
+                    <HeaderButton>
+                        <i className="fa-solid fa-gear"></i>
+                    </HeaderButton>
+                </ConfigButton>
+            </HeaderContainer>
+        }
+        </>
     )
 }

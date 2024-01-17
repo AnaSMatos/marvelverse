@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderContainer = styled.div`
     height: 60px;
     position: absolute;
-    display: ${({showHeader}) => showHeader ? 'flex' : 'none'};
+    display: flex;
     top: 0;
     right: 0;
     left: 0;
