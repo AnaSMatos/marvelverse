@@ -3,9 +3,10 @@ import {Container, SignInForm, KeyInput, SubmitButton} from './styles.js'
 import md5 from 'md5'
 import { cookies } from '../../components/cookies-config/index.js'
 import login_img from './../../assets/login-wallpaper.jpeg'
-import marvel_logo from './../../../public/marvel.svg'
+import marvel_logo from './../../assets/marvel.svg'
 
 const SignIn = () => {
+    
     const [signInForm, setSignInForm] = useState({
         publicKey: "",
         privateKey: "",
