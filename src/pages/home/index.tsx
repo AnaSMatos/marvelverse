@@ -3,7 +3,7 @@ export const Home = () => {
 
     return(
         <Container>
-            
+            redirect pra signup ou characters
         </Container>
     )
 }

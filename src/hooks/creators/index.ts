@@ -3,27 +3,32 @@ import { getAuthParams } from "../get-auth-query";
 import { API_ROUTES } from "../api-routes";
 import axios from "axios";
 
-export const useGetCreators = () => {
+export const useGetCreators = ({offset}) => {
     const [creators, setCreators] = useState([])
-    const {params} = getAuthParams({offset: 0})
+    const [isLoading, setIsLoading] = useState(false)
+    const {params} = getAuthParams({offset})
     
     const fetchCreators = () => {
+        setIsLoading(true)
         const promise = axios.get(API_ROUTES.CREATORS, {params})
         promise
         .then((res) => {
-            setCreators(res.data.data.results)
+            setCreators([...creators, ...res.data.data.results])
+            setIsLoading(false)
         })
         .catch((err) => {
             console.log(err)
+            setIsLoading(false)
         })
     }
 
     useEffect(() => {
         fetchCreators()
-    }, [])
+    }, [offset])
 
     return{
-        creators
+        creators,
+        isLoading
     }
 
 }
