@@ -1,7 +1,7 @@
 import { InfiniteScrollFooter } from "./styles"
 import { TailSpin } from "react-loader-spinner"
 
-interface ScrollFooterProps {
+type ScrollFooterProps {
     isLoading: boolean;
   }
 
