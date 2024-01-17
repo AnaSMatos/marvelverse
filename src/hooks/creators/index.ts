@@ -11,7 +11,7 @@ export const useGetCreators = ({searchQuery} : ApiProps) => {
     const [error, setError] = useState(false)
     const [hasMore, setHasMore] = useState(false)
     const [pageNumber, setPageNumber] = useState(0)
-    const {params} = getAuthParams({offset: pageNumber * 20, nameStartsWith: searchQuery})
+    const {params} = getAuthParams({offset: pageNumber * 20, searchQuery: searchQuery})
 
     const onSearchName = () => {
         setCreators([])

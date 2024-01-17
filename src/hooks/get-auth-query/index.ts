@@ -3,15 +3,23 @@ import { cookies } from "../../components/cookies-config";
 type AuthParamsProps = {
   offset?: number,
   searchQuery?: string,
-  titleStartsWith?: string,
-  nameStartsWith?: string
+  titleStartsWith?: string
 }
 
-export const getAuthParams = ({offset = 0, searchQuery = "", titleStartsWith = "", nameStartsWith = ""} : AuthParamsProps) => {
+type paramsType = {
+  ts: number,
+  apikey: string,
+  hash: string,
+  offset: number,
+  nameStartsWith?: string,
+  titleStartsWith?: string
+}
+
+export const getAuthParams = ({offset = 0, searchQuery = "", titleStartsWith = ""} : AuthParamsProps) => {
     const publicKey = cookies.get('publicKey')
     const hash = cookies.get('hash')
 
-    const params = {
+    const params:paramsType = {
         ts: 1,
         apikey: publicKey,
         hash,
@@ -24,10 +32,6 @@ export const getAuthParams = ({offset = 0, searchQuery = "", titleStartsWith = "
 
       if (titleStartsWith.trim() !== "") {
         params.titleStartsWith = titleStartsWith;
-      }
-
-      if (nameStartsWith.trim() !== "") {
-        params.nameStartsWith = nameStartsWith;
       }
     
     return{
