@@ -8,7 +8,7 @@ export const HeaderContainer = styled.div`
     right: 0;
     left: 0;
     z-index: 1;
-    background-color: #0c1521;
+    background-color: ${props => props.theme.containerBackground};
     gap: 2px;
     padding: 0 25px;
     img{
@@ -34,9 +34,10 @@ export const HeaderButton = styled.button`
     font-size: 18px;
     cursor: pointer;
     position: relative;
+    color: ${props => props.theme.headerFontColor};
     &::before{
         content: "";
-        background-color: #fff;
+        background-color: ${props => props.theme.headerFontColor};
         position: absolute;
         bottom: 10px;
         left: 0;
@@ -46,11 +47,30 @@ export const HeaderButton = styled.button`
     }
     &:hover::before{
         content: "";
-        background-color: #fff;
+        background-color: ${props => props.theme.headerFontColor};
         position: absolute;
         bottom: 10px;
         left: 0;
         height: 3px;
         width: 100%;
+    }
+`
+
+export const ThemeSwitch = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    margin-right: 20px;
+    .selected{
+        color: yellow;
+    }
+    button{
+        height: 30px;
+        color: gray;
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
     }
 `
