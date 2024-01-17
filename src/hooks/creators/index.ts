@@ -5,18 +5,28 @@ import axios from "axios";
 import { ApiProps } from "../../model/api-hook-type";
 import { Creator } from "../../model/creator";
 
-export const useGetCreators = ({offset} : ApiProps) => {
+export const useGetCreators = ({searchQuery} : ApiProps) => {
     const [creators, setCreators] = useState<Creator[]>([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(false)
-    const {params} = getAuthParams({offset})
-    
+    const [hasMore, setHasMore] = useState(false)
+    const [pageNumber, setPageNumber] = useState(0)
+    const {params} = getAuthParams({offset: pageNumber * 20, searchQuery: searchQuery})
+
+    const onSearchName = () => {
+        setCreators([])
+        setPageNumber(0)
+        fetchCreators()
+    }
+
     const fetchCreators = () => {
         setIsLoading(true)
+        setError(false)
         const promise = axios.get(API_ROUTES.CREATORS, {params})
         promise
-        .then((res: { data: {data: { results: Creator[] }}}) => {
-            setCreators([...creators, ...res.data.data.results])
+        .then((res: { data: {data: { results: Creator[], offset: number, total: number }}}) => {
+            setCreators(prevCreators => [...prevCreators, ...res.data.data.results]);
+            setHasMore(res.data.data.total > res.data.data.offset)
             setIsLoading(false)
         })
         .catch(() => {
@@ -27,12 +37,16 @@ export const useGetCreators = ({offset} : ApiProps) => {
 
     useEffect(() => {
         fetchCreators()
-    }, [offset])
+    }, [pageNumber])
 
     return{
         creators,
         isLoading,
-        error
+        error,
+        onSearchName,
+        setPageNumber,
+        pageNumber,
+        hasMore
     }
 
 }

@@ -5,10 +5,11 @@ import { useState, useRef, useCallback, RefCallback } from "react"
 import { ItemsList } from "../../components/items-list/styled"
 import { ScrollFooter } from "../../components/infinite-scroll-footer"
 import { ErrorMessage } from "../../components/error-msg"
+import { SearchInput } from "../../components/search-input"
 
 export const Comics = () => {
-    const [pageNumber, setPageNumber] = useState(0)
-    const {comics, isLoading, error} = useGetComics({offset: pageNumber * 20})
+    const [searchQuery, setSearchQuery] = useState("")
+    const {comics, isLoading, error, onSearchName, setPageNumber, hasMore} = useGetComics({searchQuery})
 
     const observer = useRef<IntersectionObserver | null>(null);
 
@@ -20,17 +21,22 @@ export const Comics = () => {
         }
 
         observer.current = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && hasMore) {
             setPageNumber(prevPage => prevPage + 1);
         }
         });
 
         observer.current.observe(node);
-    }, [isLoading, error]);
+    }, [isLoading, error, hasMore]);
+
+    const handleChange = (value: string) => {
+        setSearchQuery(value);
+    };  
     
     return(
         <Container>
             {error && <ErrorMessage />}
+            <SearchInput onChangeValue={handleChange} placeholder="Nome do quadrinho" onSearch={onSearchName}/>
             <ItemsList>
                 {comics.map((comic, index) => (
                     <ItemCard 

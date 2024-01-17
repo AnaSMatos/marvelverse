@@ -32,4 +32,25 @@ export const HeaderButton = styled.button`
     border: none;
     color: white;
     font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    &::before{
+        content: "";
+        background-color: #fff;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        height: 3px;
+        width: 0;
+        transition: 0.2s ease-in-out;
+    }
+    &:hover::before{
+        content: "";
+        background-color: #fff;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        height: 3px;
+        width: 100%;
+    }
 `

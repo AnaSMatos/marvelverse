@@ -6,18 +6,28 @@ import { ApiProps } from "../../model/api-hook-type";
 import { Comic } from "../../model/comic";
 
 
-export const useGetComics = ({offset} : ApiProps) => {
+export const useGetComics = ({searchQuery} : ApiProps) => {
     const [comics, setComics] = useState<Comic[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(false)
-    const {params} = getAuthParams({offset})
-    
+    const [hasMore, setHasMore] = useState(false)
+    const [pageNumber, setPageNumber] = useState(0)
+    const {params} = getAuthParams({offset: pageNumber * 20, titleStartsWith: searchQuery})
+
+    const onSearchName = () => {
+        setComics([])
+        setPageNumber(0)
+        fetchComics()
+    }
+
     const fetchComics = () => {
         setIsLoading(true)
+        setError(false)
         const promise = axios.get(API_ROUTES.COMICS, {params})
         promise
-        .then((res: { data: {data: { results: Comic[] }}}) => {
-            setComics([...comics, ...res.data.data.results])
+        .then((res: { data: {data: { results: Comic[], offset: number, total: number }}}) => {
+            setComics(prevComics => [...prevComics, ...res.data.data.results]);
+            setHasMore(res.data.data.total > res.data.data.offset)
             setIsLoading(false)
         })
         .catch(() => {
@@ -28,12 +38,16 @@ export const useGetComics = ({offset} : ApiProps) => {
 
     useEffect(() => {
         fetchComics()
-    }, [offset])
+    }, [pageNumber])
 
     return{
         comics,
         isLoading,
-        error
+        error,
+        onSearchName,
+        setPageNumber,
+        pageNumber,
+        hasMore
     }
 
 }

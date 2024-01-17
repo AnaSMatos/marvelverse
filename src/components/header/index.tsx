@@ -12,9 +12,9 @@ export const Header = () => {
         {showHeader &&
             <HeaderContainer>
                 <PaginationButtons>
-                    <HeaderButton onClick={() => navigate('/characters')}>Characters</HeaderButton>
-                    <HeaderButton onClick={() => navigate('/creators')}>Creators</HeaderButton>
-                    <HeaderButton onClick={() => navigate('/comics')}>Comics</HeaderButton>
+                    <HeaderButton onClick={() => navigate('/characters')}>Personagens</HeaderButton>
+                    <HeaderButton onClick={() => navigate('/creators')}>Criadores</HeaderButton>
+                    <HeaderButton onClick={() => navigate('/comics')}>Quadrinhos</HeaderButton>
                 </PaginationButtons>
                 <img src={marvel_logo} alt="" />
                 <ConfigButton>

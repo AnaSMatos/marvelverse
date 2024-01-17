@@ -5,10 +5,11 @@ import { ItemsList } from "../../components/items-list/styled"
 import { useState, useRef, useCallback, RefCallback } from "react"
 import { ScrollFooter } from "../../components/infinite-scroll-footer"
 import { ErrorMessage } from "../../components/error-msg"
+import { SearchInput } from "../../components/search-input"
 
 export const Characters = () => {
-    const [pageNumber, setPageNumber] = useState(0)
-    const {characters, isLoading, error} = useGetCharacters({offset: pageNumber * 20})
+    const [searchQuery, setSearchQuery] = useState("")
+    const {characters, isLoading, error, onSearchName, setPageNumber, hasMore} = useGetCharacters({searchQuery})
 
     const observer = useRef<IntersectionObserver | null>(null);
 
@@ -20,17 +21,22 @@ export const Characters = () => {
         }
 
         observer.current = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && hasMore) {
             setPageNumber(prevPage => prevPage + 1);
         }
         });
 
         observer.current.observe(node);
-    }, [isLoading, error]);
+    }, [isLoading, error, hasMore]);
+
+    const handleChange = (value: string) => {
+        setSearchQuery(value);
+    };  
 
     return(
         <Container>
             {error && <ErrorMessage />}
+            <SearchInput onChangeValue={handleChange} placeholder="Nome do personagem" onSearch={onSearchName}/>
             <ItemsList>
                 {characters?.map((character, index) => (
                     <ItemCard

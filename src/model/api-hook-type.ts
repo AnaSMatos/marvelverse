@@ -1,3 +1,3 @@
 export type ApiProps = {
-    offset: number
+    searchQuery: string
 }
